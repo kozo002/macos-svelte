@@ -1,11 +1,5 @@
 <script lang="ts">
-  import BigSur from './BigSur.svelte'
+  import BigSur from './components/templates/BigSur.svelte'
 </script>
 
 <BigSur />
-
-<style lang="scss">
-  html, body {
-    height: 100%;
-  }
-</style>
