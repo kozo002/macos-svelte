@@ -10,6 +10,7 @@
     position: absolute;
     top: calc(100% + 2px);
     left: 0;
+    z-index: 100;
     padding: 5px;
     min-width: 247px;
     background-color: rgba(255, 255, 255, .5);

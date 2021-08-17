@@ -59,13 +59,10 @@
   .o-menuBar {
     display: flex;
     justify-content: space-between;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
     padding: 0 6px;
-    height: 24px;
+    height: 100%;
     background-color: rgba(255, 255, 255, .3);
+    user-select: none;
 
     &__item {
       position: relative;
