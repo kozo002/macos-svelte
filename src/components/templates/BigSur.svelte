@@ -4,13 +4,41 @@
   import type { MenuBarItem } from '~/types'
 
   const menuBarItems: MenuBarItem[] = [
-    { title: 'Chrome', bold: true },
-    { title: 'File' },
-    { title: 'Edit' },
-    { title: 'Section' },
-    { title: 'View' },
-    { title: 'Window' },
-    { title: 'Help' },
+    { title: 'Chrome', bold: true, children: [
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' }
+    ] },
+    { title: 'File', children: [
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' }
+    ] },
+    { title: 'Edit', children: [
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' }
+    ] },
+    { title: 'Section', children: [
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' }
+    ] },
+    { title: 'View', children: [
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' }
+    ] },
+    { title: 'Window', children: [
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' }
+    ] },
+    { title: 'Help', children: [
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' },
+      { title: 'Child Item 1' }
+    ] },
   ]
 </script>
 

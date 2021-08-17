@@ -2,6 +2,9 @@
   import type { MenuBarItem } from '~/types'
   import BarButton from '~/components/atoms/BarButton.svelte'
   import BarButtonGroup from '~/components/atoms/BarButtonGroup.svelte'
+  import DropdownContainer from '~/components/atoms/DropdownContainer.svelte'
+  import DropdownItem from '~/components/atoms/DropdownItem.svelte'
+  import DropdownDivider from '~/components/atoms/DropdownDivider.svelte'
 
   export let menuBarItems: MenuBarItem[] = []
 
@@ -31,14 +34,23 @@
 <div class="o-menuBar">
   <BarButtonGroup>
     {#each menuBarItems as menuBarItem, i}
-      <BarButton
-        active={i === activeMenuBarItemIndex}
-        bold={menuBarItem.bold}
-        on:click={() => handleBarButtonClick(i)}
-        on:mouseenter={() => handleBarButtonMouseenter(i)}
-      >
-        {menuBarItem.title}
-      </BarButton>
+      <div class="o-menuBar__item">
+        <BarButton
+          active={i === activeMenuBarItemIndex}
+          bold={menuBarItem.bold}
+          on:click={() => handleBarButtonClick(i)}
+          on:mouseenter={() => handleBarButtonMouseenter(i)}
+        >
+          {menuBarItem.title}
+        </BarButton>
+        {#if i === activeMenuBarItemIndex && menuBarItem.children !== undefined}
+          <DropdownContainer>
+            {#each menuBarItem.children as child, i (i)}
+              <DropdownItem>{child.title}</DropdownItem>
+            {/each}
+          </DropdownContainer>
+        {/if}
+      </div>
     {/each}
   </BarButtonGroup>
 </div>
@@ -54,5 +66,11 @@
     padding: 0 6px;
     height: 24px;
     background-color: rgba(255, 255, 255, .3);
+
+    &__item {
+      position: relative;
+      display: flex;
+      align-items: stretch;
+    }
   }
 </style>

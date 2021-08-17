@@ -1,3 +1,10 @@
+:root {
+	--color-white: #ffffff;
+	--color-black: #000000;
+	--color-gray: #BBBCC6;
+	--color-blue: #1F7CE8;
+}
+
 html, body {
 	position: relative;
 	width: 100%;
