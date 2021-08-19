@@ -2,10 +2,16 @@
   import Desktop from '~/components/molecules/Desktop.svelte'
   import MenuBar from '~/components/organisms/MenuBar.svelte'
   import type { MenuBarItem } from '~/types'
-  import Window from '~/components/atoms/Window.svelte'
+  import WindowManager from '~/components/organisms/WindowManager.svelte'
+
+  import { createMouseStore } from '~/stores/mouse'
+  import { createWindowsStore } from '~/stores/windows'
+
+  const mouseStore = createMouseStore()
+  const windowsStore = createWindowsStore()
 
   const menuBarItems: MenuBarItem[] = [
-    { title: 'Chrome', bold: true, children: [
+    { title: 'Finder', bold: true, children: [
       { title: 'Child Item 1' },
       { title: 'Child Item 1' },
       { title: 'Child Item 1' }
@@ -42,25 +48,9 @@
     ] },
   ]
 
-  let grabbingWindow = false
-  let grabbedPosition = { x: 0, y: 0 }
-  let windowX = 100
-  let windowY = 80
-
-  function handleWindowMousedown(e) {
-    grabbingWindow = true
-    grabbedPosition.x = e.detail.x
-    grabbedPosition.y = e.detail.y
-  }
-
   function handleDesktopMousemove(e) {
-    if (grabbingWindow) {
-      windowX = e.detail.x - grabbedPosition.x,
-      windowY = e.detail.y - grabbedPosition.y
-      if (windowY <= 0) {
-        windowY = 0
-      }
-    }
+    const { x, y } = e.detail
+    mouseStore.setPosition({ x, y })
   }
 </script>
 
@@ -72,10 +62,5 @@
     <MenuBar {menuBarItems} />
   </svelte:fragment>
 
-  <Window
-    on:mousedown={handleWindowMousedown}
-    on:mouseup={() => (grabbingWindow = false)}
-    x={windowX}
-    y={windowY}
-  >test</Window>
+  <WindowManager {mouseStore} {windowsStore} />
 </Desktop>

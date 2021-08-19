@@ -1,16 +1,16 @@
 <script lang="ts">
   import { createEventDispatcher } from 'svelte'
+  import type { Position, Size } from '~/types'
 
-  export let x = 0
-  export let y = 0
-  let width = 500
-  let height = 250
+  export let position: Position = { x: 0, y: 0 }
+  export let size: Size = { width: 500, height: 250 }
+  export let active: boolean = false
 
   const dispatchMousedown = createEventDispatcher<{ mousedown: { x: number, y: number } }>()
   function handleMousedown(e: MouseEvent) {
     dispatchMousedown('mousedown', {
-      x: e.clientX - x,
-      y: e.clientY - y
+      x: e.clientX,
+      y: e.clientY,
     })
   }
 
@@ -22,11 +22,12 @@
 
 <div
   class="a-window"
+  class:active={active}
   style="
-    --pos-x: {x}px;
-    --pos-y: {y}px;
-    --size-width: {width}px;
-    --size-height: {height}px;
+    --pos-x: {position.x}px;
+    --pos-y: {position.y}px;
+    --size-width: {size.width}px;
+    --size-height: {size.height}px;
   "
   on:mousedown={handleMousedown}
   on:mouseup={handleMouseup}
@@ -36,6 +37,8 @@
 
 <style lang="scss">
   .a-window {
+    position: relative;
+    z-index: 10;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -47,6 +50,11 @@
     background-color: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(4px);
     border-radius: 14px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, .1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, .05);
+
+    &.active {
+      z-index: 50;
+      box-shadow: 0 2px 20px rgba(0, 0, 0, .2);
+    }
   }
 </style>
